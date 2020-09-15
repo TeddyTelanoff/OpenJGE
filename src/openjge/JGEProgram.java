@@ -2,14 +2,9 @@ package openjge;
 
 import com.treidex.opengje.core.Window;
 
-import java.util.function.Function;
-
 public class JGEProgram {
     private Window window;
     private Thread thread;
-
-    public JGEProgram() {
-    }
 
     public static void main(String[] args) {
         JGEProgram program = new JGEProgram();

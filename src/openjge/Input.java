@@ -30,4 +30,16 @@ public class Input {
     public static boolean isMouseUp(int button) {
         return CoreInput.getButtons()[button] == GLFW_RELEASE;
     }
+
+    public static Vector2 getMousePosition() {
+        return new Vector2((float) CoreInput.getMouseX(), (float) CoreInput.getMouseY());
+    }
+
+    public static Vector2 getMouseScroll() {
+        return new Vector2((float) CoreInput.getScrollX(), (float) CoreInput.getScrollY());
+    }
+
+    public static Vector2 getDeltaMouseScroll() {
+        return new Vector2((float) CoreInput.getDeltaScrollX(), (float) CoreInput.getDeltaScrollY());
+    }
 }

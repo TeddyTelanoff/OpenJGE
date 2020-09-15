@@ -1,4 +1,7 @@
-package openjge;
+package openjge.graphics;
+
+import openjge.Vector2;
+import openjge.Vector3;
 
 public class Vertex {
     private Vector3 position, normal;
