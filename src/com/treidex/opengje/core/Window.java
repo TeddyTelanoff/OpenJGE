@@ -1,5 +1,6 @@
 package com.treidex.opengje.core;
 
+import openjge.Color;
 import openjge.JGEProgram;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
@@ -17,12 +18,15 @@ public class Window {
     private int[] posX = new int[1], posY = new int[1];
     private GLFWWindowSizeCallback resizeCallback;
     private boolean isResized;
+    private Color backgroundColor;
 
     public Window(JGEProgram program, String title, int width, int height) {
         this.program = program;
         this.title = title;
         this.width = width;
         this.height = height;
+
+        setBackgroundColor(Color.GRAY);
     }
 
     public void create() {
@@ -42,6 +46,8 @@ public class Window {
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
 
+        createCallbacks();
+
         glfwShowWindow(window);
     }
 
@@ -52,12 +58,13 @@ public class Window {
             isResized = false;
         }
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glfwPollEvents();
     }
 
     public void render() {
         glfwSwapBuffers(window);
+        glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     public void destroy() {
@@ -77,6 +84,7 @@ public class Window {
         });
         glfwSetWindowSizeCallback(window, resizeCallback);
 
+        CoreInput.init();
         glfwSetKeyCallback(window, CoreInput.getKeyboardCallback());
         glfwSetCursorPosCallback(window, CoreInput.getMouseMoveCallback());
         glfwSetMouseButtonCallback(window, CoreInput.getMouseButtonsCallback());
@@ -103,12 +111,20 @@ public class Window {
         return height;
     }
 
-    public String getTitle() {
-        return title;
+    public void setBackgroundColor(Color newColor) {
+        backgroundColor = newColor;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
     }
 
     public void setTitle(String newTitle) {
         title = newTitle;
         glfwSetWindowTitle(window, newTitle);
+    }
+
+    public String getTitle() {
+        return title;
     }
 }

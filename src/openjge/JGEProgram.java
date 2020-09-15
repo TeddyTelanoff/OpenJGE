@@ -32,7 +32,7 @@ public class JGEProgram {
     }
 
     private void init() {
-        window = new Window(this, "", 1280, 720);
+        window = new Window(this, "Debug", 1280, 720);
         window.create();
     }
     private void update() {
