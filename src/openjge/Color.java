@@ -38,23 +38,14 @@ public class Color {
     }
 
     public void set(float r, float g, float b) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = 1;
+        set(r, g, b, 1);
     }
 
     public void set(float g, float a) {
-        this.r = g;
-        this.g = g;
-        this.b = g;
-        this.a = a;
+        set(g, g, g, a);
     }
 
     public void set(float g) {
-        this.r = g;
-        this.g = g;
-        this.b = g;
-        this.a = 1;
+        set(g, g, g);
     }
 }
