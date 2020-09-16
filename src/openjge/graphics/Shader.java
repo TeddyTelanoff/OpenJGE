@@ -4,6 +4,7 @@ import openjge.Matrix4;
 import openjge.Vector2;
 import openjge.Vector3;
 import openjge.Vector4;
+import openjge.util.FileUtil;
 
 import java.nio.FloatBuffer;
 
@@ -13,12 +14,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class Shader {
     public static final Shader DEFAULT = new Shader("/shaders/main.vsh", "/shaders/main.fsh");
 
-    private String vertexPath, fragmentPath;
+    private String vertexPath, fragmentPath, vertexFile, fragmentFile;
     private int vertexID, fragmentID, programID;
 
     public Shader(String vertexPath, String fragmentPath) {
         this.vertexPath = vertexPath;
         this.fragmentPath = fragmentPath;
+
+        vertexFile = FileUtil.readFile(vertexPath);
+        fragmentFile = FileUtil.readFile(fragmentPath);
 
         create();
     }
@@ -27,7 +31,7 @@ public class Shader {
         programID = glCreateProgram();
         vertexID = glCreateShader(GL_VERTEX_SHADER);
 
-        glShaderSource(vertexID, vertexPath);
+        glShaderSource(vertexID, vertexFile);
         glCompileShader(vertexID);
         if (glGetShaderi(vertexID, GL_COMPILE_STATUS) == GL_FALSE) {
             System.err.println("Error Compiling Vertex Shader '" + vertexPath + "': " + glGetShaderInfoLog(vertexID));
@@ -36,7 +40,7 @@ public class Shader {
 
         fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
 
-        glShaderSource(fragmentID, fragmentPath);
+        glShaderSource(fragmentID, fragmentFile);
         glCompileShader(fragmentID);
         if (glGetShaderi(fragmentID, GL_COMPILE_STATUS) == GL_FALSE) {
             System.err.println("Error Compiling Fragment Shader '" + fragmentPath + "': " + glGetShaderInfoLog(fragmentID));

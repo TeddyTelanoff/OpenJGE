@@ -37,15 +37,15 @@ public class JGEProgram {
 
         mesh = new Mesh(Shader.DEFAULT,
             new Vertex[] {
-                new Vertex(new Vector3(-0.75f,  0.5f, 0.0f)),
-                new Vertex(new Vector3(-0.5f, -0.75f, 0.0f)),
-                new Vertex(new Vector3( 0.75f, -0.5f, 0.0f)),
-                new Vertex(new Vector3( 0.5f,  0.75f, 0.0f))
+                new Vertex(new Vector3(-0.75f,  0.5f, -1.0f)),
+                new Vertex(new Vector3(-0.5f, -0.75f, 1.0f)),
+                new Vertex(new Vector3(0.75f, -0.5f, 1.0f)),
+                new Vertex(new Vector3(0.5f,  0.75f, -1.0f))
             }, new int[] {
                 0, 1, 2,
                 0, 3, 2
             },
-            new Material(new Color(0, 1, 0))
+            new Material(new Color(0, 1, 0, 0.5f))
         );
     }
     private void update() {
