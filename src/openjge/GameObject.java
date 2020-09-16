@@ -12,6 +12,21 @@ public class GameObject {
         this.components = components;
     }
 
+    public void update() {
+        for (Component component : components)
+            component.update();
+    }
+
+    public void fixedUpdate() {
+        for (Component component : components)
+            component.fixedUpdate();
+    }
+
+    public void lateUpdate() {
+        for (Component component : components)
+            component.lateUpdate();
+    }
+
     //region Useful Methods
     public <T extends Component> T[] getComponents() {
         List<T> array = new ArrayList<T>(2);

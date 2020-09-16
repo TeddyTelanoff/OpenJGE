@@ -1,5 +1,6 @@
 package openjge.graphics;
 
+import openjge.Component;
 import openjge.Material;
 
 import java.nio.FloatBuffer;
@@ -8,7 +9,7 @@ import java.nio.IntBuffer;
 import static org.lwjgl.opengl.GL46.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-public class Mesh {
+public class Mesh extends Component {
     private Shader shader;
     private Vertex[] vertices;
     private int[] indices;
