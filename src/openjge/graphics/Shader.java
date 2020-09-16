@@ -11,6 +11,8 @@ import static org.lwjgl.opengl.GL46.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class Shader {
+    public static final Shader DEFAULT = new Shader("/shaders/main.vsh", "/shaders/main.fsh");
+
     private String vertexPath, fragmentPath;
     private int vertexID, fragmentID, programID;
 

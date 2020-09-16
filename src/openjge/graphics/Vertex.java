@@ -13,6 +13,14 @@ public class Vertex {
         this.textureCoord = textureCoord;
     }
 
+    public Vertex(Vector3 position, Vector2 textureCoord) {
+        this(position, Vector3.ZERO, textureCoord);
+    }
+
+    public Vertex(Vector3 position) {
+        this(position, Vector3.ZERO, Vector2.ZERO);
+    }
+
     public Vector3 getPosition() {
         return position;
     }
