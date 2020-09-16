@@ -3,13 +3,17 @@ package openjge;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameObject {
-    public String name;
+public final class GameObject {
+    public final String name;
+    public Transform transform;
     public Component[] components;
 
-    public GameObject(String name, Component... components) {
+    public GameObject(String name, Transform transform, Component... components) {
         this.name = name;
+        this.transform = transform;
         this.components = components;
+
+        ownComponents();
     }
 
     public void update() {
@@ -25,6 +29,16 @@ public class GameObject {
     public void lateUpdate() {
         for (Component component : components)
             component.lateUpdate();
+    }
+
+    public void destroy() {
+        for (Component component : components)
+            component.onDestroy();
+    }
+
+    private void ownComponents() {
+        for (Component component : components)
+            component.setGameObject(this);
     }
 
     //region Useful Methods

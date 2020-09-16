@@ -4,6 +4,10 @@ public class Vector3 implements Cloneable, java.io.Serializable {
     public static final Vector3 ZERO = new Vector3(0, 0, 0);
     public static final Vector3 ONE = new Vector3(1, 1, 1);
 
+    public static final Vector3 forward = new Vector3(0, 0, 1);
+    public static final Vector3 right = new Vector3(1, 0, 0);
+    public static final Vector3 up = new Vector3(0, 1, 0);
+
     public float x, y, z;
 
     public Vector3(float x, float y, float z) {
@@ -115,10 +119,9 @@ public class Vector3 implements Cloneable, java.io.Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Vector3))
-            return false;
-        Vector3 other = (Vector3) obj;
-        return this.x == other.x && this.y == other.y && this.z == other.z;
+        if (obj instanceof Vector4 other)
+            return this.x == other.x && this.y == other.y && this.z == other.z;
+        return false;
     }
     //endregion
 

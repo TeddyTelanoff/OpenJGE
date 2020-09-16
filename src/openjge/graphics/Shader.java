@@ -13,6 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class Shader {
     public static final Shader DEFAULT = new Shader("/shaders/main.vsh", "/shaders/main.fsh");
+    public static final Shader ERROR = new Shader("/shaders/error.vsh", "/shaders/error.fsh");
 
     private String vertexPath, fragmentPath, vertexFile, fragmentFile;
     private int vertexID, fragmentID, programID;

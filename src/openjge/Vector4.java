@@ -127,10 +127,9 @@ public class Vector4 implements Cloneable, java.io.Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Vector4))
-            return false;
-        Vector4 other = (Vector4) obj;
-        return this.x == other.x && this.y == other.y && this.z == other.z && this.w == other.w;
+        if (obj instanceof Vector4 other)
+            return this.x == other.x && this.y == other.y && this.z == other.z && this.w == other.w;
+        return false;
     }
     //endregion
 

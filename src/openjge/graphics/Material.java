@@ -1,11 +1,15 @@
-package openjge;
+package openjge.graphics;
 
+import openjge.Color;
+import openjge.Vector2;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import static org.lwjgl.opengl.GL46.*;
 
-public class Material {
+public final class Material {
+    public static final Material DEFAULT = new Material(Color.GRAY);
+
     private Texture texture;
     private Vector2 textureSize;
     private String texturePath;

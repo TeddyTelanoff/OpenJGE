@@ -1,5 +1,6 @@
 package com.treidex.opengje.core;
 
+import openjge.Camera;
 import openjge.graphics.Mesh;
 
 import static org.lwjgl.opengl.GL46.*;
@@ -15,6 +16,9 @@ public class Renderer {
         if (mesh.getMaterial().isTexture())
             glBindTexture(GL_TEXTURE_2D, mesh.getMaterial().getTextureID());
         mesh.getShader().bind();
+        mesh.getShader().setUniform("transform", mesh.transform.getMatrix());
+        mesh.getShader().setUniform("view", Camera.mainCamera.transform.getMatrix());
+        mesh.getShader().setUniform("projection", Camera.mainCamera.getProjection());
         glDrawElements(GL_TRIANGLES, mesh.getIndices().length, GL_UNSIGNED_INT, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glDisableVertexAttribArray(0);

@@ -1,6 +1,7 @@
 package openjge;
 
 public class Component {
+    public Transform transform;
     private GameObject gameObject;
     private boolean goChanged;
 
@@ -9,6 +10,8 @@ public class Component {
     public void fixedUpdate() {}
 
     public void lateUpdate() {}
+
+    public void onDestroy() {}
 
     //region Useful Methods
     public <T extends Component> T[] getComponents() {
@@ -31,6 +34,7 @@ public class Component {
     public void setGameObject(GameObject gameObject) {
         if (!goChanged) {
             this.gameObject = gameObject;
+            transform = gameObject.transform;
 
             goChanged = true;
         }

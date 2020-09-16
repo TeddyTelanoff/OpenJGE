@@ -35,6 +35,10 @@ public class Input {
         return new Vector2((float) CoreInput.getMouseX(), (float) CoreInput.getMouseY());
     }
 
+    public static Vector2 getDeltaMousePosition() {
+        return new Vector2((float) CoreInput.getDeltaMouseX(), (float) CoreInput.getDeltaMouseY());
+    }
+
     public static Vector2 getMouseScroll() {
         return new Vector2((float) CoreInput.getScrollX(), (float) CoreInput.getScrollY());
     }

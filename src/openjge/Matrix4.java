@@ -22,8 +22,9 @@ public class Matrix4{
         return result;
     }
 
+    //region Static Methods
     public static Matrix4 translate(Vector3 translate) {
-        Matrix4 result = Matrix4.identity();
+        Matrix4 result = identity();
 
         result.set(3, 0, translate.x);
         result.set(3, 1, translate.y);
@@ -33,10 +34,10 @@ public class Matrix4{
     }
 
     public static Matrix4 rotate(float angle, Vector3 axis) {
-        Matrix4 result = Matrix4.identity();
+        Matrix4 result = identity();
 
-        float cos = (float) Math.cos(Math.toRadians(angle));
-        float sin = (float) Math.sin(Math.toRadians(angle));
+        float cos = (float) Math.cos(angle);
+        float sin = (float) Math.sin(angle);
         float C = 1 - cos;
 
         result.set(0, 0, cos + axis.x * axis.x * C);
@@ -53,7 +54,7 @@ public class Matrix4{
     }
 
     public static Matrix4 scale(Vector3 scalar) {
-        Matrix4 result = Matrix4.identity();
+        Matrix4 result = identity();
 
         result.set(0, 0, scalar.x);
         result.set(1, 1, scalar.y);
@@ -63,17 +64,17 @@ public class Matrix4{
     }
 
     public static Matrix4 transform(Vector3 position, Vector3 rotation, Vector3 scale) {
-        Matrix4 result = Matrix4.identity();
+        Matrix4 result = identity();
 
-        Matrix4 translationMatrix = Matrix4.translate(position);
-        Matrix4 rotXMatrix = Matrix4.rotate(rotation.x, new Vector3(1, 0, 0));
-        Matrix4 rotYMatrix = Matrix4.rotate(rotation.y, new Vector3(0, 1, 0));
-        Matrix4 rotZMatrix = Matrix4.rotate(rotation.z, new Vector3(0, 0, 1));
-        Matrix4 scaleMatrix = Matrix4.scale(scale);
+        Matrix4 translationMatrix = translate(position);
+        Matrix4 rotXMatrix = rotate(rotation.x, new Vector3(1, 0, 0));
+        Matrix4 rotYMatrix = rotate(rotation.y, new Vector3(0, 1, 0));
+        Matrix4 rotZMatrix = rotate(rotation.z, new Vector3(0, 0, 1));
+        Matrix4 scaleMatrix = scale(scale);
 
-        Matrix4 rotationMatrix = Matrix4.multiply(rotXMatrix, Matrix4.multiply(rotYMatrix, rotZMatrix));
+        Matrix4 rotationMatrix = multiply(rotXMatrix, multiply(rotYMatrix, rotZMatrix));
 
-        result = Matrix4.multiply(translationMatrix, Matrix4.multiply(rotationMatrix, scaleMatrix));
+        result = multiply(translationMatrix, multiply(rotationMatrix, scaleMatrix));
 
         return result;
     }
@@ -98,20 +99,20 @@ public class Matrix4{
         Matrix4 result = identity();
 
         Vector3 negative = new Vector3(-position.x, -position.y, -position.z);
-        Matrix4 translationMatrix = Matrix4.translate(negative);
-        Matrix4 rotXMatrix = Matrix4.rotate(rotation.x, new Vector3(1, 0, 0));
-        Matrix4 rotYMatrix = Matrix4.rotate(rotation.y, new Vector3(0, 1, 0));
-        Matrix4 rotZMatrix = Matrix4.rotate(rotation.z, new Vector3(0, 0, 1));
+        Matrix4 translationMatrix = translate(negative);
+        Matrix4 rotXMatrix = rotate(rotation.x, new Vector3(1, 0, 0));
+        Matrix4 rotYMatrix = rotate(rotation.y, new Vector3(0, 1, 0));
+        Matrix4 rotZMatrix = rotate(rotation.z, new Vector3(0, 0, 1));
 
-        Matrix4 rotationMatrix = Matrix4.multiply(rotYMatrix, Matrix4.multiply(rotZMatrix, rotXMatrix));
+        Matrix4 rotationMatrix = multiply(rotYMatrix, multiply(rotZMatrix, rotXMatrix));
 
-        result = Matrix4.multiply(translationMatrix, rotationMatrix);
+        result = multiply(translationMatrix, rotationMatrix);
 
         return result;
     }
 
     public static Matrix4 multiply(Matrix4 matrix, Matrix4 other) {
-        Matrix4 result = Matrix4.identity();
+        Matrix4 result = identity();
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -124,6 +125,7 @@ public class Matrix4{
 
         return result;
     }
+    //endregion
 
     @Override
     public int hashCode() {
