@@ -4,24 +4,31 @@ import openjge.Component;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.lwjgl.opengl.GL46.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public final class Mesh extends Component {
-    private Shader shader;
+    private static List<Mesh> meshes = new ArrayList<Mesh>();
+
     private Vertex[] vertices;
     private int[] indices;
     private Material material;
     private int vao, pbo, ibo, cbo, tbo;
 
-    public Mesh(Shader shader, Vertex[] vertices, int[] indices, Material material) {
-        this.shader = shader;
+    public Mesh(Vertex[] vertices, int[] indices, Material material) {
         this.vertices = vertices;
         this.indices = indices;
         this.material = material;
 
         create();
+    }
+
+    @Override
+    public void onDestroy() {
+        meshes.remove(this);
     }
 
     private void create() {
@@ -95,11 +102,6 @@ public final class Mesh extends Component {
         glDeleteVertexArrays(vao);
 
         material.destroy();
-        shader.destroy();
-    }
-
-    public Shader getShader() {
-        return shader;
     }
 
     public Vertex[] getVertices() {
@@ -132,5 +134,9 @@ public final class Mesh extends Component {
 
     public Material getMaterial() {
         return material;
+    }
+
+    public static List<Mesh> getMeshes() {
+        return meshes;
     }
 }

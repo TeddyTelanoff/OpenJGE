@@ -46,34 +46,31 @@ public final class GameObject {
         List<T> array = new ArrayList<T>(2);
 
         for (Component component : components)
-            try {
-                array.add((T) component);
-            } catch (ClassCastException e) {}
+            array.add((T) component);
 
         return (T[]) array.toArray();
     }
 
     public <T extends Component> boolean hasComponent() {
-        boolean has = false;
-
         for (Component component : components)
             try {
-                T temp = (T) component;
-                has = true;
+                this.<T> castText((T) component);
+                return true;
             } catch (ClassCastException e) {}
 
-        return has;
+        return false;
     }
 
     public <T extends Component> T getComponent() {
-        T out = null;
-
         for (Component component : components)
             try {
-                out = (T) component;
+                castText((T) component);
+                return (T) component;
             } catch (ClassCastException e) {}
 
-        return out;
+        return null;
     }
+
+    private <T> void castText(T obejct) {}
     //endregion
 }

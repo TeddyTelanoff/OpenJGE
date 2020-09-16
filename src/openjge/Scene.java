@@ -1,5 +1,7 @@
 package openjge;
 
+import openjge.graphics.Mesh;
+
 public final class Scene {
     private static Scene active;
     public final String name;
@@ -33,7 +35,10 @@ public final class Scene {
     }
 
     public void render() {
-
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject.<Mesh> hasComponent())
+                JGEProgram.getInstance().getRenderer().renderMesh(gameObject.<Mesh> getComponent());
+        }
     }
 
     public void destroy() {

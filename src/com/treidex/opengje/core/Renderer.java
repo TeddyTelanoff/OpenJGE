@@ -7,6 +7,8 @@ import static org.lwjgl.opengl.GL46.*;
 
 public class Renderer {
     public void renderMesh(Mesh mesh) {
+        assert Camera.mainCamera != null;
+
         glBindVertexArray(mesh.getVAO());
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
@@ -15,10 +17,10 @@ public class Renderer {
         glActiveTexture(GL_TEXTURE0);
         if (mesh.getMaterial().isTexture())
             glBindTexture(GL_TEXTURE_2D, mesh.getMaterial().getTextureID());
-        mesh.getShader().bind();
-        mesh.getShader().setUniform("transform", mesh.transform.getMatrix());
-        mesh.getShader().setUniform("view", Camera.mainCamera.transform.getMatrix());
-        mesh.getShader().setUniform("projection", Camera.mainCamera.getProjection());
+        mesh.getMaterial().getShader().bind();
+        mesh.getMaterial().getShader().setUniform("transform", mesh.transform.getMatrix());
+        mesh.getMaterial().getShader().setUniform("view", Camera.mainCamera.transform.getMatrix());
+        mesh.getMaterial().getShader().setUniform("projection", Camera.mainCamera.getProjection());
         glDrawElements(GL_TRIANGLES, mesh.getIndices().length, GL_UNSIGNED_INT, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glDisableVertexAttribArray(0);

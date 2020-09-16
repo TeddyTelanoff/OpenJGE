@@ -48,4 +48,9 @@ public class Color {
     public void set(float g) {
         set(g, g, g);
     }
+
+    @Override
+    public String toString() {
+        return "{ red: " + r + ", green: " + g + ", blue: " + b + ", alpha: " + a + " }";
+    }
 }

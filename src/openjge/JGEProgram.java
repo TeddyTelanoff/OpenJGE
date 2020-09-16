@@ -1,7 +1,6 @@
 package openjge;
 
 import com.treidex.opengje.core.*;
-import openjge.graphics.*;
 
 public class JGEProgram {
     private static JGEProgram instance;
@@ -10,17 +9,19 @@ public class JGEProgram {
     private Window window;
     private Renderer renderer;
 
-    public static void main(String[] args) {
-
-    }
-
-    public void start() {
+    public final void start() {
+        instance = this;
         mainThread = new Thread("Open Java Game Engine Program") {
             @Override
             public void run() {
                 init();
-                while (!window.shouldClose()) {
+                fixedUpdateThread.start();
+                while (true) {
+                    if (window.shouldClose())
+                        break;
                     update();
+                    if (window.shouldClose())
+                        break;
                     render();
                 }
                 destroy();
@@ -29,9 +30,11 @@ public class JGEProgram {
         fixedUpdateThread = new Thread("Fixed Update Thread (OpenJGE App)") {
             @Override
             public void run() {
-                while (!window.shouldClose()) {
+                while (true) {
                     try {
                         Thread.sleep(50);
+                        if (window.shouldClose())
+                            break;
                         fixedUpdate();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -41,29 +44,29 @@ public class JGEProgram {
         };
 
         mainThread.start();
-        fixedUpdateThread.start();
     }
 
-    private void init() {
+    public void init() {
         window = new Window(this, "Debug", 1280, 720);
         window.create();
         renderer = new Renderer();
     }
-    private void update() {
+    public void update() {
         window.update();
         Scene.getActive().update();
     }
-    private void fixedUpdate() {
+    public void fixedUpdate() {
         window.update();
         Scene.getActive().fixedUpdate();
     }
-    private void render() {
+    public void render() {
         window.render();
         Scene.getActive().render();
     }
-    private void destroy() {
+    public void destroy() {
         window.destroy();
         Scene.getActive().destroy();
+        System.exit(0);
     }
 
     public Thread getMainThread() {
