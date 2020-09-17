@@ -8,11 +8,12 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class CameraController extends Component {
     public Vector3 vel;
-    public float sens, speed;
+    public float sens, speed, speedDamp;
 
-    public CameraController(float sens, float speed) {
+    public CameraController(float sens, float speed, float speedDamp) {
         this.sens = sens;
         this.speed = speed;
+        this.speedDamp = speedDamp;
 
         vel = new Vector3();
 
@@ -36,16 +37,19 @@ public class CameraController extends Component {
     @Override
     public void fixedUpdate() {
         if (Input.isKeyHeld(GLFW_KEY_A) || Input.isKeyDown(GLFW_KEY_A))
-            transform.position.add(new Vector3(transform.getRight().x, 0, transform.getRight().z).mul(-speed));
+            vel.add(new Vector3(transform.getRight().x, 0, transform.getRight().z).mul(-speed));
         if (Input.isKeyHeld(GLFW_KEY_D) || Input.isKeyDown(GLFW_KEY_D))
-            transform.position.add(new Vector3(transform.getRight().x, 0, transform.getRight().z).mul(speed));
+            vel.add(new Vector3(transform.getRight().x, 0, transform.getRight().z).mul(speed));
         if (Input.isKeyHeld(GLFW_KEY_W) || Input.isKeyDown(GLFW_KEY_W))
-            transform.position.add(new Vector3(transform.getForward().x, 0, transform.getForward().z).mul(speed));
+            vel.add(new Vector3(transform.getForward().x, 0, transform.getForward().z).mul(speed));
         if (Input.isKeyHeld(GLFW_KEY_S) || Input.isKeyDown(GLFW_KEY_S))
-            transform.position.add(new Vector3(transform.getForward().x, 0, transform.getForward().z).mul(-speed));
+            vel.add(new Vector3(transform.getForward().x, 0, transform.getForward().z).mul(-speed));
         if (Input.isKeyHeld(GLFW_KEY_SPACE) || Input.isKeyDown(GLFW_KEY_SPACE))
-            transform.position.add(Vector3.up.mul(speed));
+            vel.add(Vector3.up().clone().mul(speed));
         if (Input.isKeyHeld(GLFW_KEY_LEFT_SHIFT) || Input.isKeyDown(GLFW_KEY_LEFT_SHIFT))
-            transform.position.add(Vector3.up.mul(-speed));
+            vel.add(Vector3.up().mul(-speed));
+
+        transform.position.add(vel);
+        vel.mul(speedDamp);
     }
 }

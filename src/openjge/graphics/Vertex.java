@@ -14,11 +14,11 @@ public class Vertex {
     }
 
     public Vertex(Vector3 position, Vector2 textureCoord) {
-        this(position, Vector3.ZERO, textureCoord);
+        this(position, Vector3.ZERO(), textureCoord);
     }
 
     public Vertex(Vector3 position) {
-        this(position, Vector3.ZERO, Vector2.ZERO);
+        this(position, Vector3.ZERO(), Vector2.ZERO());
     }
 
     public Vector3 getPosition() {

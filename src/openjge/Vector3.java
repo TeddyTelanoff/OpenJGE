@@ -1,12 +1,25 @@
 package openjge;
 
 public class Vector3 implements Cloneable, java.io.Serializable {
-    public static final Vector3 ZERO = new Vector3(0, 0, 0);
-    public static final Vector3 ONE = new Vector3(1, 1, 1);
+    public static final Vector3 ZERO() {
+        return new Vector3(0, 0, 0);
+    }
 
-    public static final Vector3 forward = new Vector3(0, 0, 1);
-    public static final Vector3 right = new Vector3(1, 0, 0);
-    public static final Vector3 up = new Vector3(0, 1, 0);
+    public static final Vector3 ONE() {
+        return new Vector3(1, 1, 1);
+    }
+
+    public static final Vector3 forward() {
+        return new Vector3(0, 0, 1);
+    }
+
+    public static final Vector3 right() {
+        return new Vector3(1, 0, 0);
+    }
+
+    public static final Vector3 up() {
+        return new Vector3(0, 1, 0);
+    }
 
     public float x, y, z;
 
@@ -26,7 +39,8 @@ public class Vector3 implements Cloneable, java.io.Serializable {
         this.z = array[2];
     }
 
-    public Vector3() {}
+    public Vector3() {
+    }
 
     //region Static Operators
     public static Vector3 add(Vector3 vec1, Vector3 vec2) {
@@ -88,7 +102,7 @@ public class Vector3 implements Cloneable, java.io.Serializable {
     }
 
     public float[] toArray() {
-        return new float[] { x, y, z };
+        return new float[]{x, y, z};
     }
 
     public Vector2 toVector2() {
@@ -105,8 +119,8 @@ public class Vector3 implements Cloneable, java.io.Serializable {
     }
 
     @Override
-    public Vector4 clone() {
-        return new Vector4(this.x, this.y, this.z);
+    public Vector3 clone() {
+        return new Vector3(this.x, this.y, this.z);
     }
 
     @Override
@@ -122,7 +136,7 @@ public class Vector3 implements Cloneable, java.io.Serializable {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Vector4 other)
-            return this.x == other.x && this.y == other.y && this.z == other.z;
+        return this.x == other.x && this.y == other.y && this.z == other.z;
         return false;
     }
     //endregion
@@ -135,7 +149,7 @@ public class Vector3 implements Cloneable, java.io.Serializable {
 
     //region Instance Methods
     public float magSquared() {
-        return this.x*this.x + this.y*this.y + this.z*this.z;
+        return this.x * this.x + this.y * this.y + this.z * this.z;
     }
 
     public float mag() {

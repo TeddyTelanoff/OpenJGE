@@ -1,8 +1,13 @@
 package openjge;
 
 public class Vector2 implements Cloneable, java.io.Serializable {
-    public static final Vector2 ZERO = new Vector2(0, 0);
-    public static final Vector2 ONE = new Vector2(1, 1);
+    public static final Vector2 ZERO() {
+        return new Vector2(0, 0);
+    }
+
+    public static final Vector2 ONE() {
+        return new Vector2(1, 1);
+    }
 
     public float x, y;
 
@@ -15,6 +20,8 @@ public class Vector2 implements Cloneable, java.io.Serializable {
         this.x = array[0];
         this.y = array[1];
     }
+
+    public Vector2() {}
 
     //region Static Operators
     public static Vector2 add(Vector2 vec1, Vector2 vec2) {
@@ -88,8 +95,8 @@ public class Vector2 implements Cloneable, java.io.Serializable {
     }
 
     @Override
-    public Vector4 clone() {
-        return new Vector4(this.x, this.y);
+    public Vector2 clone() {
+        return new Vector2(this.x, this.y);
     }
 
     @Override
