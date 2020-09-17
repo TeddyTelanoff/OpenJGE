@@ -42,35 +42,30 @@ public final class GameObject {
     }
 
     //region Useful Methods
-    public <T extends Component> T[] getComponents() {
+    public <T extends Component> T[] getComponents(Class<T> tclass) {
         List<T> array = new ArrayList<T>(2);
 
         for (Component component : components)
-            array.add((T) component);
+            if (tclass.isInstance(component))
+                array.add((T) component);
 
         return (T[]) array.toArray();
     }
 
-    public <T extends Component> boolean hasComponent() {
+    public <T extends Component> boolean hasComponent(Class<T> tclass) {
         for (Component component : components)
-            try {
-                this.<T> castText((T) component);
+            if (tclass.isInstance(component))
                 return true;
-            } catch (ClassCastException e) {}
 
         return false;
     }
 
-    public <T extends Component> T getComponent() {
+    public <T extends Component> T getComponent(Class<T> tclass) {
         for (Component component : components)
-            try {
-                castText((T) component);
+            if (tclass.isInstance(component))
                 return (T) component;
-            } catch (ClassCastException e) {}
 
         return null;
     }
-
-    private <T> void castText(T obejct) {}
     //endregion
 }

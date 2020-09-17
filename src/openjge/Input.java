@@ -1,6 +1,6 @@
 package openjge;
 
-import com.treidex.opengje.core.CoreInput;
+import com.treidex.openjge.core.CoreInput;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -29,6 +29,10 @@ public class Input {
 
     public static boolean isMouseUp(int button) {
         return CoreInput.getButtons()[button] == GLFW_RELEASE;
+    }
+
+    public static void setCursorMode(int mode) {
+        CoreInput.setCursorMode(mode);
     }
 
     public static Vector2 getMousePosition() {

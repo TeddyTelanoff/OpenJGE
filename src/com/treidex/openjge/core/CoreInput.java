@@ -1,5 +1,6 @@
-package com.treidex.opengje.core;
+package com.treidex.openjge.core;
 
+import openjge.JGEProgram;
 import org.lwjgl.glfw.*;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -8,6 +9,7 @@ public class CoreInput {
     private static int[] keys = new int[GLFW_KEY_LAST];
     private static int[] buttons = new int[GLFW_MOUSE_BUTTON_LAST];
     private static double mouseX, mouseY;
+    private static double pmouseX, pmouseY;
     private static double deltaMouseX, deltaMouseY;
     private static double scrollX, scrollY;
     private static double deltaScrollX, deltaScrollY;
@@ -23,9 +25,6 @@ public class CoreInput {
         keyboard = GLFWKeyCallback.create((long window, int key, int scancode, int action, int mods) ->  keys[key] = action);
 
         mouseMove = GLFWCursorPosCallback.create((long window, double mouseX, double mouseY) -> {
-            deltaMouseX = mouseX - CoreInput.mouseX;
-            deltaMouseY = mouseY - CoreInput.mouseY;
-
             CoreInput.mouseX = mouseX;
             CoreInput.mouseY = mouseY;
         });
@@ -39,6 +38,18 @@ public class CoreInput {
             deltaScrollX = deltaX;
             deltaScrollY = deltaY;
         });
+    }
+
+    public static void update() {
+        deltaMouseX = mouseX - pmouseX;
+        deltaMouseY = mouseY - pmouseY;
+
+        pmouseX = mouseX;
+        pmouseY = mouseY;
+    }
+
+    public static void setCursorMode(int mode) {
+        GLFW.glfwSetInputMode(JGEProgram.getInstance().getWindow().getWindow(), GLFW.GLFW_CURSOR, mode);
     }
 
     public static void destroy() {

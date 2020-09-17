@@ -36,8 +36,8 @@ public class Matrix4{
     public static Matrix4 rotate(float angle, Vector3 axis) {
         Matrix4 result = identity();
 
-        float cos = (float) Math.cos(angle);
-        float sin = (float) Math.sin(angle);
+        float cos = (float) Math.cos(Math.toRadians(angle));
+        float sin = (float) Math.sin(Math.toRadians(angle));
         float C = 1 - cos;
 
         result.set(0, 0, cos + axis.x * axis.x * C);

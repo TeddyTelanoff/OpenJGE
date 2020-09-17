@@ -12,6 +12,10 @@ public final class Camera extends Component {
         this.far = far;
     }
 
+    public Matrix4 getView() {
+        return Matrix4.view(transform.position, transform.rotation);
+    }
+
     public Matrix4 getProjection() {
         return Matrix4.projection(fov, (float) JGEProgram.getInstance().getWindow().getWidth() / JGEProgram.getInstance().getWindow().getHeight(), near, far);
     }

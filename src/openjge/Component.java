@@ -14,16 +14,16 @@ public class Component {
     public void onDestroy() {}
 
     //region Useful Methods
-    public <T extends Component> T[] getComponents() {
-        return gameObject.<T> getComponents();
+    public <T extends Component> T[] getComponents(Class<T> tclass) {
+        return gameObject.<T> getComponents(tclass);
     }
 
-    public <T extends Component> T getComponent() {
-        return gameObject.<T> getComponent();
+    public <T extends Component> T getComponent(Class<T> tclass) {
+        return gameObject.<T> getComponent(tclass);
     }
 
-    public <T extends Component> boolean hasComponent() {
-        return gameObject.<T> hasComponent();
+    public <T extends Component> boolean hasComponent(Class<T> tclass) {
+        return gameObject.<T> hasComponent(tclass);
     }
     //endregion
 

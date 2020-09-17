@@ -36,8 +36,8 @@ public final class Scene {
 
     public void render() {
         for (GameObject gameObject : gameObjects) {
-            if (gameObject.<Mesh> hasComponent())
-                JGEProgram.getInstance().getRenderer().renderMesh(gameObject.<Mesh> getComponent());
+            if (gameObject.hasComponent(Mesh.class))
+                JGEProgram.getInstance().getRenderer().renderMesh(gameObject.getComponent(Mesh.class));
         }
     }
 

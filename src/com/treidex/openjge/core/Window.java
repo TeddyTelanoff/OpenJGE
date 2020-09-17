@@ -1,11 +1,10 @@
-package com.treidex.opengje.core;
+package com.treidex.openjge.core;
 
 import openjge.Color;
 import openjge.JGEProgram;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 
-import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL46.*;
 import static org.lwjgl.system.MemoryUtil.*;

@@ -1,6 +1,6 @@
 package openjge;
 
-import com.treidex.opengje.core.*;
+import com.treidex.openjge.core.*;
 
 public class JGEProgram {
     private static JGEProgram instance;
@@ -52,6 +52,7 @@ public class JGEProgram {
         renderer = new Renderer();
     }
     public void update() {
+        CoreInput.update();
         window.update();
         Scene.getActive().update();
     }
