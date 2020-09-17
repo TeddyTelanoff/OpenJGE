@@ -54,6 +54,13 @@ public class Vector3 implements Cloneable, java.io.Serializable {
     public static Vector3 mul(Vector3 vec, float value) {
         return new Vector3(vec.x * value, vec.y * value, vec.z * value);
     }
+    public static Vector3 mul(Vector3 vec, Matrix4 matrix) {
+        return new Vector3(
+            vec.x * matrix.get(0, 0) + (vec.y * matrix.get(1, 0)) + (vec.z * matrix.get(2, 0)),
+            vec.x * matrix.get(0, 1) + (vec.y * matrix.get(1, 1)) + (vec.z * matrix.get(2, 1)),
+            vec.x * matrix.get(0, 2) + (vec.y * matrix.get(1, 2)) + (vec.z * matrix.get(2, 2))
+        );
+    }
 
     public static Vector3 div(Vector3 vec, float value) {
         return new Vector3(vec.x / value, vec.y / value, vec.z / value);
@@ -75,6 +82,9 @@ public class Vector3 implements Cloneable, java.io.Serializable {
 
     public Vector3 mul(float value) {
         return set(mul(this, value));
+    }
+    public Vector3 mul(Matrix4 matrix) {
+        return set(mul(this, matrix));
     }
 
     public Vector3 div(float value) {
