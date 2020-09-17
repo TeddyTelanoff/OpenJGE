@@ -13,7 +13,7 @@ public final class Camera extends Component {
     }
 
     public Matrix4 getView() {
-        return Matrix4.view(transform.position, transform.rotation);
+        return transform.getView();
     }
 
     public Matrix4 getProjection() {

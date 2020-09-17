@@ -9,8 +9,19 @@ public class Transform extends Component {
         this.scale = scale;
     }
 
+    public Transform() {
+        this(new Vector3(), new Vector3(), new Vector3(1, 1, 1));
+    }
+
     public Matrix4 getMatrix() {
-        return Matrix4.transform(position, rotation, scale);
+        return Matrix4.transform(Vector3.add(position, gameObject().getParent() == null ? Vector3.ZERO() : gameObject().getParent().transform.position),
+                Vector3.add(rotation, gameObject().getParent() == null ? Vector3.ZERO() : gameObject().getParent().transform.rotation),
+                Vector3.mul(scale, gameObject().getParent() == null ? Vector3.ONE() : gameObject().getParent().transform.scale));
+    }
+
+    public Matrix4 getView() {
+        return Matrix4.view(Vector3.add(position, gameObject().getParent() == null ? Vector3.ZERO() : gameObject().getParent().transform.position),
+                Vector3.add(rotation, gameObject().getParent() == null ? Vector3.ZERO() : gameObject().getParent().transform.rotation));
     }
 
     public Vector3 getForward() {
@@ -23,9 +34,5 @@ public class Transform extends Component {
 
     public Vector3 getUp() {
         return Vector3.up().mul(getView());
-    }
-
-    private Matrix4 getView() {
-        return Matrix4.view(position, rotation);
     }
 }
