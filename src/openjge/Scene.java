@@ -2,6 +2,8 @@ package openjge;
 
 import openjge.graphics.Mesh;
 
+import java.util.Arrays;
+
 public final class Scene {
     private static Scene active;
     public final String name;
@@ -16,6 +18,11 @@ public final class Scene {
         if (getActive() != null)
             getActive().destroy();
         active = scene;
+    }
+
+    public void init() {
+        for (GameObject gameObject : gameObjects)
+            gameObject.init();
     }
 
     public void update() {
@@ -35,10 +42,9 @@ public final class Scene {
     }
 
     public void render() {
-        for (GameObject gameObject : gameObjects) {
+        for (GameObject gameObject : gameObjects)
             if (gameObject.hasComponent(Mesh.class))
                 JGEProgram.getInstance().getRenderer().renderMesh(gameObject.getComponent(Mesh.class));
-        }
     }
 
     public void destroy() {

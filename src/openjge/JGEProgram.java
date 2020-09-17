@@ -1,6 +1,8 @@
 package openjge;
 
 import com.treidex.openjge.core.*;
+import openjge.graphics.Mesh;
+import openjge.graphics.Shader;
 
 public class JGEProgram {
     private static JGEProgram instance;
@@ -15,6 +17,7 @@ public class JGEProgram {
             @Override
             public void run() {
                 init();
+                setup();
                 fixedUpdateThread.start();
                 while (true) {
                     if (window.shouldClose())
@@ -51,6 +54,9 @@ public class JGEProgram {
         window.create();
         renderer = new Renderer();
     }
+    public void setup() {
+        Scene.getActive().init();
+    }
     public void update() {
         CoreInput.update();
         window.update();
@@ -67,6 +73,8 @@ public class JGEProgram {
     public void destroy() {
         window.destroy();
         Scene.getActive().destroy();
+        for (Shader shader : Shader.getShaders())
+            shader.destroy();
         System.exit(0);
     }
 

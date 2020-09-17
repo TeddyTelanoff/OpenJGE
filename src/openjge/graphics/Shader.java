@@ -7,11 +7,14 @@ import openjge.Vector4;
 import openjge.util.FileUtil;
 
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.lwjgl.opengl.GL46.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class Shader {
+    private static final List<Shader> shaders = new ArrayList<Shader>();
     public static final Shader DEFAULT = new Shader("/shaders/main.vsh", "/shaders/main.fsh");
     public static final Shader ERROR = new Shader("/shaders/error.vsh", "/shaders/error.fsh");
 
@@ -26,6 +29,7 @@ public class Shader {
         fragmentFile = FileUtil.readFile(fragmentPath);
 
         create();
+        shaders.add(this);
     }
 
     private void create() {
@@ -36,6 +40,7 @@ public class Shader {
         glCompileShader(vertexID);
         if (glGetShaderi(vertexID, GL_COMPILE_STATUS) == GL_FALSE) {
             System.err.println("Error Compiling Vertex Shader '" + vertexPath + "': " + glGetShaderInfoLog(vertexID));
+            error();
             return;
         }
 
@@ -45,6 +50,7 @@ public class Shader {
         glCompileShader(fragmentID);
         if (glGetShaderi(fragmentID, GL_COMPILE_STATUS) == GL_FALSE) {
             System.err.println("Error Compiling Fragment Shader '" + fragmentPath + "': " + glGetShaderInfoLog(fragmentID));
+            error();
             return;
         }
 
@@ -53,11 +59,14 @@ public class Shader {
         glLinkProgram(programID);
         if (glGetProgrami(programID, GL_LINK_STATUS) == GL_FALSE) {
             System.err.println("Error Linking Shader: " + glGetShaderInfoLog(vertexID));
+            error();
             return;
         }
 
-        glDeleteShader(vertexID);
-        glDeleteShader(programID);
+        glValidateProgram(programID);
+        if (glGetProgrami(programID, GL_VALIDATE_STATUS) == GL_FALSE) {
+            System.err.println("Error Validating Program: " + glGetProgramInfoLog(programID));
+        }
     }
 
     public int getUniformLocation(String name) {
@@ -94,6 +103,10 @@ public class Shader {
         glUniformMatrix4fv(getUniformLocation(name), true, matrix);
     }
 
+    public static List<Shader> getShaders() {
+        return shaders;
+    }
+
     public void bind() {
         glUseProgram(programID);
     }
@@ -103,6 +116,22 @@ public class Shader {
     }
 
     public void destroy() {
+        glDetachShader(programID, vertexID);
+        glDetachShader(programID, fragmentID);
+        glDeleteShader(vertexID);
+        glDeleteShader(fragmentID);
         glDeleteProgram(programID);
+    }
+
+    private void error() {
+        vertexPath = ERROR.vertexPath;
+        fragmentPath = ERROR.fragmentPath;
+
+        vertexFile = ERROR.vertexFile;
+        fragmentFile = ERROR.fragmentFile;
+
+        vertexID = ERROR.vertexID;
+        fragmentID = ERROR.fragmentID;
+        programID = ERROR.programID;
     }
 }

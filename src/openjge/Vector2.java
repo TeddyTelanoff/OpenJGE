@@ -77,6 +77,10 @@ public class Vector2 implements Cloneable, java.io.Serializable {
         return this;
     }
 
+    public Vector2 set(float[] array) {
+        return set(array[0], array[1]);
+    }
+
     public float[] toArray() {
         return new float[] { x, y };
     }

@@ -1,8 +1,6 @@
 package com.treidex.openjge.test;
 
-import openjge.Component;
-import openjge.Input;
-import openjge.Vector3;
+import openjge.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -49,6 +47,7 @@ public class CameraController extends Component {
         if (Input.isKeyHeld(GLFW_KEY_LEFT_SHIFT) || Input.isKeyDown(GLFW_KEY_LEFT_SHIFT))
             vel.add(transform.getUp().mul(-speed));
 
+//        gameObject().children[0].transform.position.add(vel);
         transform.position.add(vel);
         vel.mul(speedDamp);
     }

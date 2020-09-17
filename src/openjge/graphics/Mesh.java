@@ -3,19 +3,19 @@ package openjge.graphics;
 import openjge.Component;
 import openjge.Vector2;
 import openjge.Vector3;
-import org.lwjgl.assimp.*;
+import org.lwjgl.assimp.AIFace;
+import org.lwjgl.assimp.AIMesh;
+import org.lwjgl.assimp.AIScene;
+import org.lwjgl.assimp.AIVector3D;
+import org.lwjgl.assimp.Assimp;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.lwjgl.opengl.GL46.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public final class Mesh extends Component {
-    private static List<Mesh> meshes = new ArrayList<Mesh>();
-
     private Vertex[] vertices;
     private int[] indices;
     private Material material;
@@ -78,7 +78,7 @@ public final class Mesh extends Component {
 
     @Override
     public void onDestroy() {
-        meshes.remove(this);
+        destroy();
     }
 
     private void create() {
@@ -184,9 +184,5 @@ public final class Mesh extends Component {
 
     public Material getMaterial() {
         return material;
-    }
-
-    public static List<Mesh> getMeshes() {
-        return meshes;
     }
 }

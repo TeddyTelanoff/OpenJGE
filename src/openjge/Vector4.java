@@ -99,6 +99,10 @@ public class Vector4 implements Cloneable, java.io.Serializable {
         return set(x, y, 1);
     }
 
+    public Vector4 set(float[] array) {
+        return set(array[0], array[1], array[2], array[3]);
+    }
+
     public float[] toArray() {
         return new float[] { x, y, z, w };
     }

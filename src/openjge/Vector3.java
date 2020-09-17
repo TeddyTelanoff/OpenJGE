@@ -22,6 +22,7 @@ public class Vector3 implements Cloneable, java.io.Serializable {
     }
 
     public float x, y, z;
+    private boolean clone;
 
     public Vector3(float x, float y, float z) {
         this.x = x;
@@ -121,6 +122,10 @@ public class Vector3 implements Cloneable, java.io.Serializable {
 
     public Vector3 set(float x, float y) {
         return set(x, y, 1);
+    }
+
+    public Vector3 set(float[] array) {
+        return set(array[0], array[1], array[2]);
     }
 
     public float[] toArray() {

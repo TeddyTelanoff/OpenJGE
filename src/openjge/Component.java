@@ -5,6 +5,8 @@ public class Component {
     private GameObject gameObject;
     private boolean goChanged;
 
+    public void init() {}
+
     public void update() {}
 
     public void fixedUpdate() {}

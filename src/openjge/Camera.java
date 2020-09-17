@@ -12,6 +12,11 @@ public final class Camera extends Component {
         this.far = far;
     }
 
+    public void init() {
+        System.out.println(gameObject());
+        Camera.mainCamera = this;
+    }
+
     public Matrix4 getView() {
         return transform.getView();
     }

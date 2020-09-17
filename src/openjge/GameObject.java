@@ -29,6 +29,13 @@ public final class GameObject {
         ownComponents();
     }
 
+    public void init() {
+        for (Component component : components)
+            component.init();
+        for (GameObject child : children)
+            child.init();
+    }
+
     public void update() {
         for (Component component : components)
             component.update();
@@ -67,7 +74,7 @@ public final class GameObject {
 
     private void ownChildren() {
         for (GameObject child : children)
-            child.parent = parent;
+            child.parent = this;
     }
 
     public GameObject getParent() {
