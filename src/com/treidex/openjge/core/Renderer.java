@@ -1,13 +1,14 @@
 package com.treidex.openjge.core;
 
 import openjge.Camera;
+import openjge.Debug;
 import openjge.graphics.Mesh;
 
 import static org.lwjgl.opengl.GL46.*;
 
 public class Renderer {
     public void renderMesh(Mesh mesh) {
-        assert Camera.mainCamera != null;
+        Debug.Assert(Camera.mainCamera != null, "There must be a Main Camera!");
 
         glBindVertexArray(mesh.getVAO());
         glEnableVertexAttribArray(0);

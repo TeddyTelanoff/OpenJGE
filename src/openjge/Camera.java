@@ -13,7 +13,6 @@ public final class Camera extends Component {
     }
 
     public void init() {
-        System.out.println(gameObject());
         Camera.mainCamera = this;
     }
 

@@ -1,6 +1,7 @@
 package com.treidex.openjge.core;
 
 import openjge.Color;
+import openjge.Debug;
 import openjge.JGEProgram;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
@@ -34,6 +35,8 @@ public class Window {
         if (!glfwInit())
             throw new IllegalStateException("Unable to initialize GLFW");
 
+        if (Debug.isDebuging())
+            title += " - Debug";
         window = glfwCreateWindow(width, height, title, NULL, NULL);
         if (window == NULL)
             throw new RuntimeException("Failed to create GLFW window");
@@ -110,6 +113,7 @@ public class Window {
         return height;
     }
 
+
     public void setBackgroundColor(Color newColor) {
         backgroundColor = newColor;
     }
@@ -120,7 +124,9 @@ public class Window {
 
     public void setTitle(String newTitle) {
         title = newTitle;
-        glfwSetWindowTitle(window, newTitle);
+        if (Debug.isDebuging())
+            title += " - Debug";
+        glfwSetWindowTitle(window, title);
     }
 
     public String getTitle() {
