@@ -25,10 +25,10 @@ public class Program extends JGEProgram {
         Scene mainScene = new Scene("Main Scene",
             new GameObject("Camera", new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(1, 1, 1)),
                 Camera.mainCamera = new Camera(90, 0.01f, 100),
-                new CameraController(2, 5)
+                new CameraController(2, 1f)
             ),
-            new GameObject("Camera", new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(1, 3, 1)),
-                Mesh.loadModel("res/models/test.obj", Material.DEFAULT)
+            new GameObject("Camera", new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(3, 3, 3)),
+                Mesh.loadModel("res/models/test.obj", new Material(Color.PURPLE))
             )
         );
         Scene.setActive(mainScene);

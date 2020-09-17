@@ -7,11 +7,14 @@ import openjge.Vector3;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class CameraController extends Component {
+    public Vector3 vel;
     public float sens, speed;
 
     public CameraController(float sens, float speed) {
         this.sens = sens;
         this.speed = speed;
+
+        vel = new Vector3();
 
         Input.setCursorMode(GLFW_CURSOR_DISABLED);
     }
