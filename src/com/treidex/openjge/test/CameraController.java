@@ -45,7 +45,7 @@ public class CameraController extends Component {
         if (Input.isKeyHeld(GLFW_KEY_S) || Input.isKeyDown(GLFW_KEY_S))
             vel.add(new Vector3(transform.getForward().x, 0, transform.getForward().z).mul(-speed));
         if (Input.isKeyHeld(GLFW_KEY_SPACE) || Input.isKeyDown(GLFW_KEY_SPACE))
-            vel.add(Vector3.up().clone().mul(speed));
+            vel.add(Vector3.up().mul(speed));
         if (Input.isKeyHeld(GLFW_KEY_LEFT_SHIFT) || Input.isKeyDown(GLFW_KEY_LEFT_SHIFT))
             vel.add(Vector3.up().mul(-speed));
 

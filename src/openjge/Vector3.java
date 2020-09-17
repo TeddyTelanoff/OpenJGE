@@ -10,7 +10,7 @@ public class Vector3 implements Cloneable, java.io.Serializable {
     }
 
     public static final Vector3 forward() {
-        return new Vector3(0, 0, 1);
+        return new Vector3(0, 0, -1);
     }
 
     public static final Vector3 right() {
@@ -135,7 +135,7 @@ public class Vector3 implements Cloneable, java.io.Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Vector4 other)
+        if (obj instanceof Vector3 other)
         return this.x == other.x && this.y == other.y && this.z == other.z;
         return false;
     }
