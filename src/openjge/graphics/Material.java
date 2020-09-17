@@ -38,8 +38,7 @@ public final class Material {
         this.texturePath = texturePath;
 
         try {
-            texture = TextureLoader.getTexture(texturePath.split("[.]")[texturePath.split("[.]").length - 1],
-                    Material.class.getResourceAsStream(texturePath), GL_NEAREST);
+            texture = TextureLoader.getTexture("PNG", Material.class.getResourceAsStream(texturePath), GL_NEAREST);
             textureSize = new Vector2(texture.getWidth(), texture.getHeight());
             textureID = texture.getTextureID();
         } catch (java.io.IOException e) {

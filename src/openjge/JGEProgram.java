@@ -1,5 +1,6 @@
 package openjge;
 
+import com.treidex.openjge.Time;
 import com.treidex.openjge.core.*;
 import openjge.graphics.Shader;
 
@@ -12,7 +13,7 @@ public final class JGEProgram {
     private JGEProgramI inface;
     private String title;
     private int width, height;
-    private long fixedUpdateIntervalMilis;
+    private long fixedUpdateIntervalMillis;
 
     public interface JGEProgramI {
         void onStart();
@@ -24,7 +25,7 @@ public final class JGEProgram {
         this.width = width;
         this.height = height;
 
-        fixedUpdateIntervalMilis = (long) (fixedUpdateIntervalSeconds * 1000);
+        fixedUpdateIntervalMillis = (long) (fixedUpdateIntervalSeconds * 1000);
     }
 
     public JGEProgram(JGEProgramI inface, String title, int width, int height) {
@@ -55,7 +56,7 @@ public final class JGEProgram {
             public void run() {
                 while (true) {
                     try {
-                        Thread.sleep(fixedUpdateIntervalMilis);
+                        Thread.sleep(fixedUpdateIntervalMillis);
                         if (window.shouldClose())
                             break;
                         fixedUpdate();
@@ -74,6 +75,8 @@ public final class JGEProgram {
         if (Debug.isDebuging())
             System.out.println("Debugging Enabled!");
 
+        Time.init(fixedUpdateIntervalMillis);
+
         window = new Window(this, title, width, height);
         window.create();
         renderer = new Renderer();
@@ -83,6 +86,7 @@ public final class JGEProgram {
         Scene.getActive().init();
     }
     public void update() {
+        Time.update();
         CoreInput.update();
         window.update();
         Scene.getActive().update();

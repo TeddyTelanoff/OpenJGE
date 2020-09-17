@@ -4,8 +4,11 @@ import openjge.*;
 import openjge.graphics.*;
 
 public class Program {
+    static JGEProgram program;
+
     public static void main(String[] args) {
-        JGEProgram program = new JGEProgram(() -> {
+        program = new JGEProgram(() -> {
+            program.getWindow().setBackgroundColor(Color.BLACK);
             Scene mainScene = new Scene("Main Scene",
                 new GameObject("Player", new Transform(),
                     new Component[]{
@@ -16,7 +19,7 @@ public class Program {
                     }
                 ),
                 new GameObject("Camera", new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(3, 3, 3)),
-                    Mesh.loadModel("res/models/test.obj", new Material(Shader.ERROR, Color.BLACK)),
+                    Mesh.loadModel("res/models/test.obj", new Material(Shader.DEFAULT, "/textures/test.png")),
                     new SpinnyBoy()
                 )
             );
