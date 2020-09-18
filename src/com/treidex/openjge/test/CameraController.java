@@ -5,7 +5,7 @@ import openjge.*;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class CameraController extends Component {
-    public Vector3 vel;
+    public Vector3 pos, vel;
     public float sens, speed, speedDamp;
 
     public CameraController(float sens, float speed, float speedDamp) {
@@ -14,6 +14,7 @@ public class CameraController extends Component {
         this.speedDamp = speedDamp;
 
         vel = new Vector3();
+        pos = new Vector3();
 
         Input.setCursorMode(GLFW_CURSOR_DISABLED);
     }
@@ -30,6 +31,8 @@ public class CameraController extends Component {
             gameObject().children[0].transform.rotation.x = 90;
         if (gameObject().children[0].transform.rotation.x <= -90)
             gameObject().children[0].transform.rotation.x = -90;
+
+        transform.position.lerp(pos, 0.14f);
     }
 
     @Override
@@ -47,8 +50,7 @@ public class CameraController extends Component {
         if (Input.isKeyHeld(GLFW_KEY_LEFT_SHIFT) || Input.isKeyDown(GLFW_KEY_LEFT_SHIFT))
             vel.add(transform.getUp().mul(-speed));
 
-//        gameObject().children[0].transform.position.add(vel);
-        transform.position.add(vel);
+        pos.add(vel);
         vel.mul(speedDamp);
     }
 }

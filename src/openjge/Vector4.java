@@ -55,6 +55,10 @@ public class Vector4 implements Cloneable, java.io.Serializable {
     public static Vector4 neg(Vector4 vec) {
         return new Vector4(-vec.x, -vec.y, -vec.z, -vec.w);
     }
+
+    public static Vector4 lerp(Vector4 start, Vector4 stop, float lerp) {
+        return new Vector4(Mathf.lerp(start.x, stop.x, lerp), Mathf.lerp(start.y, stop.y, lerp), Mathf.lerp(start.z, stop.z, lerp), Mathf.lerp(start.w, stop.w, lerp));
+    }
     //endregion
 
     //region Instance Operators
@@ -76,6 +80,10 @@ public class Vector4 implements Cloneable, java.io.Serializable {
 
     public Vector4 neg() {
         return set(neg(this));
+    }
+
+    public Vector4 lerp(Vector4 vec, float lerp) {
+        return set(lerp(this, vec, lerp));
     }
 
     public Vector4 set(Vector4 other) {

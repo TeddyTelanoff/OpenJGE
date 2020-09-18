@@ -8,7 +8,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class CoreInput {
     private static int[] keys = new int[GLFW_KEY_LAST];
     private static int[] buttons = new int[GLFW_MOUSE_BUTTON_LAST];
-    private static double mouseX, mouseY;
+    private static double[] mouseX = new double[1], mouseY = new double[1];
     private static double pmouseX, pmouseY;
     private static double deltaMouseX, deltaMouseY;
     private static double scrollX, scrollY;
@@ -22,11 +22,13 @@ public class CoreInput {
     private CoreInput() {}
 
     public static void init() {
+        glfwGetCursorPos(JGEProgram.getInstance().getWindow().getWindow(), mouseX, mouseY);
+
         keyboard = GLFWKeyCallback.create((long window, int key, int scancode, int action, int mods) ->  keys[key] = action);
 
         mouseMove = GLFWCursorPosCallback.create((long window, double mouseX, double mouseY) -> {
-            CoreInput.mouseX = mouseX;
-            CoreInput.mouseY = mouseY;
+            CoreInput.mouseX[0] = mouseX;
+            CoreInput.mouseY[0] = mouseY;
         });
 
         mouseButtons = GLFWMouseButtonCallback.create((long window, int button, int action, int mods) -> buttons[button] = action);
@@ -41,11 +43,11 @@ public class CoreInput {
     }
 
     public static void update() {
-        deltaMouseX = mouseX - pmouseX;
-        deltaMouseY = mouseY - pmouseY;
+        deltaMouseX = mouseX[0] - pmouseX;
+        deltaMouseY = mouseY[0] - pmouseY;
 
-        pmouseX = mouseX;
-        pmouseY = mouseY;
+        pmouseX = mouseX[0];
+        pmouseY = mouseY[0];
     }
 
     public static void setCursorMode(int mode) {
@@ -68,11 +70,11 @@ public class CoreInput {
     }
 
     public static double getMouseX() {
-        return mouseX;
+        return mouseX[0];
     }
 
     public static double getMouseY() {
-        return mouseY;
+        return mouseY[0];
     }
 
     public static double getDeltaMouseX() {
