@@ -16,8 +16,7 @@ public class Renderer {
         glEnableVertexAttribArray(2);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.getIBO());
         glActiveTexture(GL_TEXTURE0);
-        if (mesh.getMaterial().isTexture())
-            glBindTexture(GL_TEXTURE_2D, mesh.getMaterial().getTextureID());
+        glBindTexture(GL_TEXTURE_2D, mesh.getMaterial().getTextureID());
         mesh.getMaterial().getShader().bind();
         mesh.getMaterial().getShader().setUniform("transform", mesh.transform.getMatrix());
         mesh.getMaterial().getShader().setUniform("view", Camera.mainCamera.getView());

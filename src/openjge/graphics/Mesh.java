@@ -98,31 +98,29 @@ public final class Mesh extends Component {
 
         pbo = storeData(positionBuffer, 0, 3);
 
-        if (material.isTexture()) {
-            // Texture
-            FloatBuffer textureBuffer = memAllocFloat(vertices.length * 2);
-            float[] textureData = new float[vertices.length * 2];
-            for (int i = 0; i < vertices.length; i++) {
-                textureData[i * 2] = vertices[i].getTextureCoord().x;
-                textureData[i * 2 + 1] = vertices[i].getTextureCoord().y;
-            }
-            textureBuffer.put(textureData).flip();
-
-            tbo = storeData(textureBuffer, 2, 2);
-        } else {
-            // Color
-            FloatBuffer colorBuffer = memAllocFloat(vertices.length * 4);
-            float[] colorData = new float[vertices.length * 4];
-            for (int i = 0; i < vertices.length; i++) {
-                colorData[i * 4] = material.getColor().r;
-                colorData[i * 4 + 1] = material.getColor().g;
-                colorData[i * 4 + 2] = material.getColor().b;
-                colorData[i * 4 + 3] = material.getColor().a;
-            }
-            colorBuffer.put(colorData).flip();
-
-            cbo = storeData(colorBuffer, 1, 4);
+        // Color
+        FloatBuffer colorBuffer = memAllocFloat(vertices.length * 4);
+        float[] colorData = new float[vertices.length * 4];
+        for (int i = 0; i < vertices.length; i++) {
+            colorData[i * 4] = material.getColor().r;
+            colorData[i * 4 + 1] = material.getColor().g;
+            colorData[i * 4 + 2] = material.getColor().b;
+            colorData[i * 4 + 3] = material.getColor().a;
         }
+        colorBuffer.put(colorData).flip();
+
+        cbo = storeData(colorBuffer, 1, 4);
+
+        // Texture
+        FloatBuffer textureBuffer = memAllocFloat(vertices.length * 2);
+        float[] textureData = new float[vertices.length * 2];
+        for (int i = 0; i < vertices.length; i++) {
+            textureData[i * 2] = vertices[i].getTextureCoord().x;
+            textureData[i * 2 + 1] = vertices[i].getTextureCoord().y;
+        }
+        textureBuffer.put(textureData).flip();
+
+        tbo = storeData(textureBuffer, 2, 2);
 
         // Indices
         IntBuffer indicesBuffer = memAllocInt(indices.length);

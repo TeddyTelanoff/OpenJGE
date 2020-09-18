@@ -14,17 +14,17 @@ public final class Debug {
         return isDebugging;
     }
 
-    public static void log(String msg) {
+    public static void log(Object msg) {
         if (isDebugging)
             System.out.println(msg);
     }
 
-    public static void logErr(String errorMsg) {
+    public static void logErr(Object errorMsg) {
         if (isDebugging)
             System.err.println(errorMsg);
     }
 
-    public static void Assert(boolean condition, String errorMsg) {
+    public static void Assert(boolean condition, Object errorMsg) {
         if (isDebugging && !condition) {
             throw new AssertionError(errorMsg);
         }

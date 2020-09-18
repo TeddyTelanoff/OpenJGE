@@ -5,6 +5,8 @@ import openjge.Vector2;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
+import java.io.IOException;
+
 import static org.lwjgl.opengl.GL46.*;
 
 public final class Material {
@@ -18,34 +20,33 @@ public final class Material {
 
     private Color color;
 
-    private boolean isTexture;
-
     private Material(Shader shader) {
         this.shader = shader;
+    }
+
+    public Material(Shader shader, Color color, String texturePath) {
+        this(shader);
+
+        this.color = color;
+        this.texturePath = texturePath;
+
+        try {
+            texture = TextureLoader.getTexture(texturePath.split("[.]")[1], Material.class.getResourceAsStream(texturePath), GL_NEAREST);
+            textureSize = new Vector2(texture.getWidth(), texture.getHeight());
+            textureID = texture.getTextureID();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Material(Shader shader, Color color) {
         this(shader);
 
         this.color = color;
-
-        isTexture = false;
     }
 
     public Material(Shader shader, String texturePath) {
-        this(shader);
-
-        this.texturePath = texturePath;
-
-        try {
-            texture = TextureLoader.getTexture("PNG", Material.class.getResourceAsStream(texturePath), GL_NEAREST);
-            textureSize = new Vector2(texture.getWidth(), texture.getHeight());
-            textureID = texture.getTextureID();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
-
-        isTexture = true;
+        this(shader, Color.BLACK, texturePath);
     }
 
     public Material(Color color) {
@@ -66,10 +67,6 @@ public final class Material {
 
     public Color getColor() {
         return color;
-    }
-
-    public boolean isTexture() {
-        return isTexture;
     }
 
     public Texture getTexture() {
