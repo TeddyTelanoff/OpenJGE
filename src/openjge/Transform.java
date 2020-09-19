@@ -27,18 +27,18 @@ public class Transform extends Component {
     public Vector3 getForward() {
         Matrix4 view = getView();
 
-        return new Vector3(
-            view.get(2, 0),
-            view.get(2, 1),
-            view.get(2, 2)
-        );
+        return new Vector3(view.get(2, 0), view.get(2, 1), -view.get(2, 2));
     }
 
     public Vector3 getRight() {
-        return Vector3.right().mul(getView());
+        Matrix4 view = getView();
+
+        return new Vector3(view.get(0, 0), view.get(0, 1), -view.get(0, 2));
     }
 
     public Vector3 getUp() {
-        return Vector3.up().mul(getView());
+        Matrix4 view = getView();
+
+        return new Vector3(view.get(1, 0), view.get(1, 1), -view.get(1, 2));
     }
 }

@@ -2,6 +2,9 @@ package com.treidex.openjge.test;
 
 import openjge.*;
 import openjge.graphics.*;
+import org.lwjglx.util.vector.Matrix;
+import org.lwjglx.util.vector.Matrix4f;
+import org.lwjglx.util.vector.Vector3f;
 
 public class Program {
     static JGEProgram program;
@@ -25,7 +28,7 @@ public class Program {
             );
             Scene.setActive(mainScene);
 
-            Debug.log(Matrix4.perspective(60, 1, 1, 100));
+            Debug.log(Matrix4.view(new Vector3(1, 1, 1), new Vector3(0, 0, 0)));
         }, "Open Java Game Engine Test", 1280, 720, 1d/20);
         program.start();
     }

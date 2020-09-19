@@ -1,5 +1,7 @@
 package openjge;
 
+import org.lwjglx.util.vector.Matrix;
+
 import java.util.Arrays;
 
 public class Matrix4{
@@ -10,11 +12,9 @@ public class Matrix4{
     public static Matrix4 identity() {
         Matrix4 result = new Matrix4();
 
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++)
                 result.set(i, j, 0);
-            }
-        }
 
         result.set(0, 0, 1);
         result.set(1, 1, 1);
@@ -66,7 +66,7 @@ public class Matrix4{
     }
 
     public static Matrix4 transform(Vector3 position, Vector3 rotation, Vector3 scale) {
-        Matrix4 result = identity();
+        Matrix4 result;
 
         Matrix4 translationMatrix = translate(position);
         Matrix4 rotXMatrix = rotate(rotation.x, new Vector3(1, 0, 0));
@@ -113,7 +113,7 @@ public class Matrix4{
     }
 
     public static Matrix4 view(Vector3 position, Vector3 rotation) {
-        Matrix4 result = identity();
+        Matrix4 result;
 
         Vector3 negative = new Vector3(-position.x, -position.y, -position.z);
         Matrix4 translationMatrix = translate(negative);
@@ -131,19 +131,20 @@ public class Matrix4{
     public static Matrix4 multiply(Matrix4 matrix, Matrix4 other) {
         Matrix4 result = identity();
 
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++)
                 result.set(i, j, matrix.get(i, 0) * other.get(0, j) +
                         matrix.get(i, 1) * other.get(1, j) +
                         matrix.get(i, 2) * other.get(2, j) +
                         matrix.get(i, 3) * other.get(3, j));
-            }
-        }
 
         return result;
     }
     //endregion
 
+    //region Instance Methods
+
+    //endregion
 
     @Override
     public String toString() {
