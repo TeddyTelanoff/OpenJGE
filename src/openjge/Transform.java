@@ -1,6 +1,7 @@
 package openjge;
 
-public class Transform extends Component {
+public final class Transform extends Component {
+
     public Vector3 position, rotation, scale;
 
     public Transform(Vector3 position, Vector3 rotation, Vector3 scale) {

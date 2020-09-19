@@ -47,6 +47,10 @@ public class Window {
         glfwSetWindowPos(window, posX[0], posY[0]);
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
+        glEnable(GL_DEPTH_TEST);
+        glDepthMask(true);
+        glDepthFunc(GL_LEQUAL);
+        glDepthRange(0, 1);
 
         createCallbacks();
 
