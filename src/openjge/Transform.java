@@ -25,7 +25,13 @@ public class Transform extends Component {
     }
 
     public Vector3 getForward() {
-        return Vector3.forward().mul(getView());
+        Matrix4 view = getView();
+
+        return new Vector3(
+            view.get(2, 0),
+            view.get(2, 1),
+            view.get(2, 2)
+        );
     }
 
     public Vector3 getRight() {
