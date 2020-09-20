@@ -1,6 +1,11 @@
 package openjge;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Coroutine {
+    private static List<Thread> coroutines = new ArrayList<Thread>(3);
+
     private Coroutine() {}
 
     public static void waitForWeeks(double amt) {
@@ -36,6 +41,25 @@ public class Coroutine {
     }
 
     public static void startCoroutine(Runnable coroutine) {
-        new Thread(coroutine).start();
+        Thread routine;
+        coroutines.add(routine = new Thread(coroutine));
+        routine.start();
+    }
+
+    public static void stopCoroutine(Runnable coroutine) {
+        int index = coroutines.indexOf(new Thread(coroutine));
+        Debug.Assert(index >= 0, "Coroutine doesn't Exist!");
+        coroutines.get(index).interrupt();
+        coroutines.remove(index);
+    }
+
+    public static void stopAllCoroutines() {
+        for (Thread coroutine : coroutines)
+            coroutine.interrupt();
+        coroutines.removeAll(coroutines);
+    }
+
+    public static List<Thread> getCoroutines() {
+        return coroutines;
     }
 }

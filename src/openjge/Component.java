@@ -47,6 +47,14 @@ public class Component {
     public final void startCoroutine(Runnable coroutine) {
         gameObject.startCoroutine(coroutine);
     }
+
+    public void stopCoroutine(Runnable coroutine) {
+        gameObject.stopCoroutine(coroutine);
+    }
+
+    public void stopAllCoroutines() {
+        gameObject.stopAllCoroutines();
+    }
     //endregion
 
     public final GameObject gameObject() {

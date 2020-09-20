@@ -129,5 +129,13 @@ public final class GameObject {
     public void startCoroutine(Runnable coroutine) {
         Scene.getActive().startCoroutine(coroutine);
     }
+
+    public void stopCoroutine(Runnable coroutine) {
+        Scene.getActive().stopCoroutine(coroutine);
+    }
+
+    public void stopAllCoroutines() {
+        Scene.getActive().stopAllCoroutines();
+    }
     //endregion
 }

@@ -58,6 +58,14 @@ public final class Scene {
         Coroutine.startCoroutine(coroutine);
     }
 
+    public void stopCoroutine(Runnable coroutine) {
+        Coroutine.stopCoroutine(coroutine);
+    }
+
+    public void stopAllCoroutines() {
+        Coroutine.stopAllCoroutines();
+    }
+
     public GameObject[] gameObjects() {
         return gameObjects;
     }
