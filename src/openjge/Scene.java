@@ -2,22 +2,17 @@ package openjge;
 
 import openjge.graphics.Mesh;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public final class Scene {
     private static Scene active;
     public final String name;
-    public GameObject[] gameObjects;
+    private GameObject[] gameObjects;
 
     public Scene(String name, GameObject... gameObjects) {
         this.name = name;
         this.gameObjects = gameObjects;
-    }
-
-    public static void setActive(Scene scene) {
-        if (getActive() != null)
-            getActive().destroy();
-        active = scene;
     }
 
     public void init() {
@@ -47,12 +42,31 @@ public final class Scene {
                 JGEProgram.getInstance().getRenderer().renderMesh(gameObject.getComponent(Mesh.class));
     }
 
-    public void destroy() {
+    public void destroy(GameObject gameObject) {
+        int index = ArrayUtil.indexOf(gameObjects, gameObject);
+        Debug.Assert(index != -1, "Game Object doesn't exist in the Scene!");
+        gameObjects[index].destroy();
+        gameObjects = ArrayUtil.remove(GameObject.class, gameObjects, index);
+    }
+
+    public void destroyAll() {
         for (GameObject gameObject : gameObjects)
             gameObject.destroy();
     }
 
+    public GameObject[] gameObjects() {
+        return gameObjects;
+    }
+
     public static Scene getActive() {
         return active;
+    }
+
+    public static void setActive(Scene scene) {
+        Debug.Assert(scene != null, "The Active Scene must not be null!");
+
+        if (getActive() != null)
+            getActive().destroyAll();
+        active = scene;
     }
 }

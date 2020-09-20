@@ -5,28 +5,25 @@ import java.util.List;
 
 public final class GameObject {
     public final String name;
+    public final int layer;
     private GameObject parent;
     public Transform transform;
     public Component[] components;
     public GameObject[] children;
 
-    public GameObject(String name, Transform transform, Component... components) {
+    public GameObject(String name, int layer, Transform transform, Component[] components, GameObject[] children) {
         this.name = name;
-        this.transform = transform;
-        this.components = components;
-        children = new GameObject[0];
-
-        ownComponents();
-    }
-
-    public GameObject(String name, Transform transform, Component[] components, GameObject[] children) {
-        this.name = name;
+        this.layer = layer;
         this.transform = transform;
         this.components = components;
         this.children = children;
 
         ownChildren();
         ownComponents();
+    }
+
+    public GameObject(String name, int layer, Transform transform, Component... components) {
+        this(name, layer, transform, components, new GameObject[0]);
     }
 
     public void init() {
@@ -106,6 +103,17 @@ public final class GameObject {
                 return (T) component;
 
         return null;
+    }
+
+    public void destroy(Component component) {
+        int index = ArrayUtil.indexOf(components, component);
+        Debug.Assert(index != -1, "Game Object doesn't exist in the Scene!");
+        components[index].onDestroy();
+        components = ArrayUtil.remove(Component.class, components, index);
+    }
+
+    public void destroy(GameObject gameObject) {
+        Scene.getActive().destroy(gameObject);
     }
     //endregion
 }

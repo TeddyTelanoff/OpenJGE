@@ -101,7 +101,7 @@ public final class JGEProgram {
     }
     public void destroy() {
         window.destroy();
-        Scene.getActive().destroy();
+        Scene.getActive().destroyAll();
         for (Shader shader : Shader.getShaders())
             shader.destroy();
         System.exit(0);

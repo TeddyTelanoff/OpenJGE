@@ -27,6 +27,14 @@ public class Component {
     public <T extends Component> boolean hasComponent(Class<T> tclass) {
         return gameObject.<T> hasComponent(tclass);
     }
+
+    public void destroy(Component component) {
+        gameObject.destroy(component);
+    }
+
+    public void destroy(GameObject gameObject) {
+        gameObject.destroy(gameObject);
+    }
     //endregion
 
     public GameObject gameObject() {
