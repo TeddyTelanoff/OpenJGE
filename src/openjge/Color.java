@@ -14,6 +14,10 @@ public class Color {
 
     public float r, g, b, a;
 
+    public Color(int argb) {
+        set(argb);
+    }
+
     public Color(float r, float g, float b, float a) {
         set(r, g, b, a);
     }
@@ -28,6 +32,10 @@ public class Color {
 
     public Color(float g) {
         set(g);
+    }
+
+    public void set(int argb) {
+
     }
 
     public void set(float r, float g, float b, float a) {

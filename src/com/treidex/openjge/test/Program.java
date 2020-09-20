@@ -8,7 +8,7 @@ public class Program {
 
     public static void main(String[] args) {
         program = new JGEProgram(() -> {
-            program.getWindow().setBackgroundColor(new Color(57/255, 57/255, 57/255));
+            program.getWindow().setBackgroundColor(new Color((float) 57 / 255, (float) 57 / 255, (float) 57 / 255));
             Scene mainScene = new Scene("Main Scene",
                 new GameObject("Player", 0, new Transform(),
                     new Component[]{
