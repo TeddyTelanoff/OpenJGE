@@ -1,5 +1,7 @@
 package openjge;
 
+import openjge.util.ArrayUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +105,14 @@ public final class GameObject {
                 return (T) component;
 
         return null;
+    }
+
+    public void addComponent(Component componentToAdd) {
+        components = ArrayUtil.add(Component.class, components, componentToAdd);
+    }
+
+    public void addComponents(Component... componentsToAdd) {
+        components = ArrayUtil.add(Component.class, components, componentsToAdd);
     }
 
     public void destroy(Component component) {

@@ -1,9 +1,7 @@
 package openjge;
 
 import openjge.graphics.Mesh;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import openjge.util.ArrayUtil;
 
 public final class Scene {
     private static Scene active;

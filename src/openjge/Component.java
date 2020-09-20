@@ -1,5 +1,7 @@
 package openjge;
 
+import openjge.util.ArrayUtil;
+
 public class Component {
     public Transform transform;
     private GameObject gameObject;
@@ -26,6 +28,14 @@ public class Component {
 
     public final <T extends Component> boolean hasComponent(Class<T> tclass) {
         return gameObject.<T> hasComponent(tclass);
+    }
+
+    public void addComponent(Component componentToAdd) {
+        gameObject.addComponent(componentToAdd);
+    }
+
+    public void addComponents(Component... componentsToAdd) {
+        gameObject.addComponents(componentsToAdd);
     }
 
     public final void destroy(Component component) {
