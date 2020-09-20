@@ -16,32 +16,44 @@ public class Component {
     public void onDestroy() {}
 
     //region Useful Methods
-    public <T extends Component> T[] getComponents(Class<T> tclass) {
+    public final <T extends Component> T[] getComponents(Class<T> tclass) {
         return gameObject.<T> getComponents(tclass);
     }
 
-    public <T extends Component> T getComponent(Class<T> tclass) {
+    public final <T extends Component> T getComponent(Class<T> tclass) {
         return gameObject.<T> getComponent(tclass);
     }
 
-    public <T extends Component> boolean hasComponent(Class<T> tclass) {
+    public final <T extends Component> boolean hasComponent(Class<T> tclass) {
         return gameObject.<T> hasComponent(tclass);
     }
 
-    public void destroy(Component component) {
+    public final void destroy(Component component) {
         gameObject.destroy(component);
     }
 
-    public void destroy(GameObject gameObject) {
+    public final void destroy(GameObject gameObject) {
         gameObject.destroy(gameObject);
+    }
+
+    public void destroyAll(GameObject gameObject) {
+        gameObject.destroyAll(gameObject);
+    }
+
+    public void destroyAll() {
+        gameObject.destroyAll();
+    }
+
+    public final void startCoroutine(Runnable coroutine) {
+        gameObject.startCoroutine(coroutine);
     }
     //endregion
 
-    public GameObject gameObject() {
+    public final GameObject gameObject() {
         return gameObject;
     }
 
-    public void setGameObject(GameObject gameObject) {
+    public final void setGameObject(GameObject gameObject) {
         if (!goChanged) {
             this.gameObject = gameObject;
             transform = gameObject.transform;

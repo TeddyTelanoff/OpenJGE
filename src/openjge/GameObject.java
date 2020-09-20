@@ -115,5 +115,19 @@ public final class GameObject {
     public void destroy(GameObject gameObject) {
         Scene.getActive().destroy(gameObject);
     }
+
+    public void destroyAll(GameObject gameObject) {
+        for (Component component : gameObject.components)
+            destroy(component);
+        components = new Component[0];
+    }
+
+    public void destroyAll() {
+        Scene.getActive().destroy(this);
+    }
+
+    public void startCoroutine(Runnable coroutine) {
+        Scene.getActive().startCoroutine(coroutine);
+    }
     //endregion
 }

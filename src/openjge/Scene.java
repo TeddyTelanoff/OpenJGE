@@ -54,6 +54,10 @@ public final class Scene {
             gameObject.destroy();
     }
 
+    public void startCoroutine(Runnable coroutine) {
+        Coroutine.startCoroutine(coroutine);
+    }
+
     public GameObject[] gameObjects() {
         return gameObjects;
     }
