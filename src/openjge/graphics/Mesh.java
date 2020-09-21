@@ -90,7 +90,7 @@ public final class Mesh extends Component {
         FloatBuffer positionBuffer = memAllocFloat(vertices.length * 3);
         float[] positionData = new float[vertices.length * 3];
         for (int i = 0; i < vertices.length; i++) {
-            positionData[i * 3] = vertices[i].getPosition().x;
+            positionData[i * 3 + 0] = vertices[i].getPosition().x;
             positionData[i * 3 + 1] = vertices[i].getPosition().y;
             positionData[i * 3 + 2] = vertices[i].getPosition().z;
         }
@@ -102,7 +102,7 @@ public final class Mesh extends Component {
         FloatBuffer colorBuffer = memAllocFloat(vertices.length * 4);
         float[] colorData = new float[vertices.length * 4];
         for (int i = 0; i < vertices.length; i++) {
-            colorData[i * 4] = material.getColor().r;
+            colorData[i * 4 + 0] = material.getColor().r;
             colorData[i * 4 + 1] = material.getColor().g;
             colorData[i * 4 + 2] = material.getColor().b;
             colorData[i * 4 + 3] = material.getColor().a;
@@ -115,7 +115,7 @@ public final class Mesh extends Component {
         FloatBuffer textureBuffer = memAllocFloat(vertices.length * 2);
         float[] textureData = new float[vertices.length * 2];
         for (int i = 0; i < vertices.length; i++) {
-            textureData[i * 2] = vertices[i].getTextureCoord().x;
+            textureData[i * 2 + 0] = vertices[i].getTextureCoord().x;
             textureData[i * 2 + 1] = vertices[i].getTextureCoord().y;
         }
         textureBuffer.put(textureData).flip();

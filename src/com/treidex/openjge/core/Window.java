@@ -51,6 +51,10 @@ public class Window {
         glDepthMask(true);
         glDepthFunc(GL_LEQUAL);
         glDepthRange(0, 1);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glEnable(GL_LINE_SMOOTH);
+        glEnable(GL_DITHER);
 
         createCallbacks();
 
@@ -59,7 +63,7 @@ public class Window {
 
     public void update() {
         if (isResized) {
-            glViewport(0, 0, width, height);
+            glViewport(0, 0, width + 50, height);
 
             isResized = false;
         }

@@ -1,4 +1,4 @@
-package com.treidex.openjge;
+package openjge;
 
 public final class Time {
     private static float fixedDeltaTime;

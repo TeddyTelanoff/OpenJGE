@@ -1,6 +1,5 @@
 package openjge;
 
-import com.treidex.openjge.Time;
 import com.treidex.openjge.core.*;
 import openjge.graphics.Shader;
 
@@ -92,7 +91,6 @@ public final class JGEProgram {
         Scene.getActive().update();
     }
     public void fixedUpdate() {
-        window.update();
         Scene.getActive().fixedUpdate();
     }
     public void render() {
