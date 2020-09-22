@@ -1,5 +1,6 @@
 package com.treidex.openjge.test;
 
+import com.treidex.openjge.core.CoreInput;
 import openjge.*;
 
 import static org.lwjgl.glfw.GLFW.*;

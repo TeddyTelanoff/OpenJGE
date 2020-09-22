@@ -24,7 +24,7 @@ public class CoreInput {
     public static void init() {
         glfwGetCursorPos(JGEProgram.getInstance().getWindow().getWindow(), mouseX, mouseY);
 
-        keyboard = GLFWKeyCallback.create((long window, int key, int scancode, int action, int mods) ->  keys[key] = action);
+        keyboard = GLFWKeyCallback.create((long window, int key, int scancode, int action, int mods) -> keys[key] = action);
 
         mouseMove = GLFWCursorPosCallback.create((long window, double mouseX, double mouseY) -> {
             CoreInput.mouseX[0] = mouseX;
@@ -48,6 +48,9 @@ public class CoreInput {
 
         pmouseX = mouseX[0];
         pmouseY = mouseY[0];
+
+        for (int key : keys)
+            key = GLFW_KEY_UNKNOWN;
     }
 
     public static void setCursorMode(int mode) {
