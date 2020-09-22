@@ -49,8 +49,9 @@ public class CoreInput {
         pmouseX = mouseX[0];
         pmouseY = mouseY[0];
 
-        for (int key : keys)
-            key = GLFW_KEY_UNKNOWN;
+        for (int i = 0; i < keys.length; i++)
+            if (keys[i] == GLFW_RELEASE)
+                keys[i] = GLFW_KEY_UNKNOWN;
     }
 
     public static void setCursorMode(int mode) {
